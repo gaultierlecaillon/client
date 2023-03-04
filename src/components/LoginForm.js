@@ -2,9 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 export default class PersonAdd extends React.Component {
-    state = {
-        name: ''
-    }
     handleChangeUsername = event => {
         this.setState({username: event.target.value});
     }
@@ -19,14 +16,14 @@ export default class PersonAdd extends React.Component {
         };
 
         axios.post(
-            'http://127.0.0.1:8000/api/login',
+            'http://127.0.0.1:8000/api/login', //TODO
             {
                 username: this.state.username,
                 password: this.state.password,
             },
             {headers}
         ).then(response => {
-            console.log("Success ========>", response);
+            console.log("Success ========>", response.data);
         }).catch(error => {
                 console.log("Error ========>", error);
             }
