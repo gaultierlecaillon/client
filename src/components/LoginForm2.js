@@ -3,18 +3,47 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import axios from "axios";
+import {Alert} from "@mui/material";
+
+// JWT
+import Cookies from "universal-cookie";
+import {useState} from "react";
+const cookies = new Cookies();
 
 export default function SignInSide() {
+    const [error, setError] = React.useState(false);
+
+    const saveJWT = (token) => {
+        cookies.set(
+            "jwt_authorization_pwc", token, {
+                maxAge: 3600 // Will expire after 1hr (value is in number of sec.)
+            });
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        axios.post(
+            'http://127.0.0.1:8000/api/login', //TODO
+            {
+                username: data.get('username').toLowerCase(),
+                password: data.get('password').toLowerCase(),
+            },
+            {headers}
+        ).then(response => {
+            console.log("Success:", response.data.token);
+            saveJWT(response.data.token);
+        }).catch(error => {
+                setError(true);
+                console.log("Error:", error);
+            }
+        )
     };
 
     return (
@@ -36,10 +65,10 @@ export default function SignInSide() {
                     margin="normal"
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
                     autoFocus
                 />
                 <TextField
@@ -60,6 +89,11 @@ export default function SignInSide() {
                 >
                     Sign In
                 </Button>
+                {error && (
+                    <Alert variant="outlined" severity="error">
+                        <strong>Unable to Login</strong> - Please check your credentials
+                    </Alert>
+                )}
             </Box>
         </Box>
     );
