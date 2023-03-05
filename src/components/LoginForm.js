@@ -13,21 +13,15 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 
-export default function SignInSide() {
+export default function SignInSide(props) {
     const [error, setError] = React.useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    useEffect(() => {
-        const jwtToken = cookies.get('jwt_authorization_pwc');
-        setIsLoggedIn(!!jwtToken);
-    }, []);
+    const isLoggedIn = props.isLoggedIn;
 
     const saveJWT = (token) => {
         cookies.set(
             "jwt_authorization_pwc", token, {
                 maxAge: 3600 // Will expire after 1hr (value is in number of sec.)
             });
-        setIsLoggedIn(true);
     }
 
     const handleSubmit = (event) => {

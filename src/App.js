@@ -10,9 +10,20 @@ import Paper from "@mui/material/Paper";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 
-
+// JWT
+import Cookies from "universal-cookie";
+import {useEffect, useState} from "react";
 
 function App() {
+
+    // Is the user logged in ?
+    const cookies = new Cookies();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        const jwtToken = cookies.get('jwt_authorization_pwc');
+        setIsLoggedIn(!!jwtToken);
+    }, []);
+
     return (
         <div className="App">
             <Grid container component="main" sx={{height: '100vh'}}>
@@ -22,10 +33,15 @@ function App() {
                     <Typography component="h1" variant="h4" align="center" fontWeight="bold" color="#474747">
                         Guess The Number
                     </Typography>
-                    <LoginForm/>
-                    <GameNew/>
-                    <GamePlay/>
-                    <GameList/>
+                    {isLoggedIn ? (
+                        <div>
+                            <GameNew isLoggedIn={isLoggedIn} />
+                            <GamePlay isLoggedIn={isLoggedIn} />
+                            <GameList isLoggedIn={isLoggedIn} />
+                        </div>
+                    ) : (
+                        <LoginForm isLoggedIn={isLoggedIn} />
+                    )}
                 </Grid>
             </Grid>
         </div>
