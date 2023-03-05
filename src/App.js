@@ -28,7 +28,6 @@ function App() {
                     <GameList/>
                 </Grid>
             </Grid>
-
         </div>
     );
 }
