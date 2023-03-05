@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {Box} from "@mui/material";
 import Cookies from "universal-cookie";
 
-export default class GameList extends React.Component {
-    state = {
-        games: []
-    }
+export default function GameList() {
+    const [games, setGames] = useState([]);
 
-    componentDidMount() {
+    const fetchData = () => {
         const cookies = new Cookies();
         const jwtToken = cookies.get('jwt_authorization_pwc');
         const headers = {
@@ -15,26 +14,30 @@ export default class GameList extends React.Component {
             'Authorization': `Bearer ${jwtToken}`
         };
         axios.get(
-            `http://127.0.0.1:8000/api/game/`,
+            `${process.env.REACT_APP_HOST_API}/api/game`,
             {headers}
-        )
-            .then(res => {
-                const games = res.data.data.games;
-                console.log(games);
-                this.setState({games});
-            })
+        ).then(res => {
+            const games = res.data.data.games;
+            setGames(games);
+        })
     }
 
-    render() {
-        return (
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+
+    return (
+        <Box sx={{my: 8, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',}}>
+            <p>Games List</p>
             <ul>
                 {
-                    this.state.games
-                        .map(game =>
-                            <li key={game.id}>Game id#{game.id}</li>
-                        )
+                    games.map(game =>
+                        <li key={game.id}>Game id#{game.id}</li>
+                    )
                 }
             </ul>
-        )
-    }
+        </Box>
+    )
+
 }
