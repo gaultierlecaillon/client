@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Button} from "@mui/material";
 
 
 export default class GameNew extends React.Component {
@@ -24,8 +25,12 @@ export default class GameNew extends React.Component {
     }
 
     render() {
-        return (<div>
-            <button onClick={this.handleClick}>New game</button>
-        </div>)
+        return (
+            <div>
+                <Button color="primary" variant="contained" onClick={this.handleClick}>
+                    New game
+                </Button>
+            </div>
+        )
     }
 }
