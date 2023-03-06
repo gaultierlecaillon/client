@@ -1,12 +1,10 @@
 import React, {useContext, useState} from 'react';
 import axios from 'axios';
-import {Button, Box, Alert} from "@mui/material";
-import TextField from "@mui/material/TextField";
+import {Button, Box, Alert, TextField} from "@mui/material";
 import Cookies from "universal-cookie";
 import gameHashContext from "../game-context";
 import {useWindowSize} from 'react-use';
 import Confetti from 'react-confetti'
-
 
 export default function GamePlay() {
     const [message, setMessage] = useState();
@@ -46,17 +44,9 @@ export default function GamePlay() {
         )
     };
 
-
     return (
-        <Box sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-        }}>
+        <Box sx={{my: 8, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',}}>
             <Box component="form" noValidate onSubmit={handleSubmit}>
-
                 <TextField
                     margin="normal"
                     required
@@ -67,10 +57,7 @@ export default function GamePlay() {
                 />
 
                 {isFinished && (
-                    <Confetti
-                        width={width}
-                        height={height}
-                    />
+                    <Confetti width={width} height={height}/>
                 )}
 
                 {!isFinished ? (
@@ -88,7 +75,6 @@ export default function GamePlay() {
                         {message.value}
                     </Alert>
                 )}
-
             </Box>
         </Box>
     )

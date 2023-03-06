@@ -1,36 +1,22 @@
+import * as React from "react";
+import {useEffect, useState} from "react";
 import GameNew from './components/GameNew';
 import GamePlay from './components/GamePlay';
 import Header from './components/Header';
-import './App.css';
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import * as React from "react";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import {Grid, Paper, Button, Box, Avatar, TextField, Alert, Snackbar, CssBaseline, Typography} from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from "axios";
-import {Alert, Snackbar, CssBaseline, Typography} from "@mui/material";
-
 import gameHashContext from "./game-context";
-
-
-// JWT
-//import Cookies from "universal-cookie";
 import {useCookies} from 'react-cookie';
-import {useEffect, useState} from "react";
 
 function App() {
     const [cookies, setCookie, removeCookie] = useCookies(['jwt_authorization_pwc']);
 
-    // Is the user logged in ?
     const [error, setError] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [gameHash, setGameHash] = React.useState(null);
     const value = {gameHash, setGameHash};
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 
     useEffect(() => {
         if (cookies.jwt_authorization_pwc) {
@@ -51,6 +37,7 @@ function App() {
     };
 
     const logout = () => {
+        setGameHash();
         setIsLoggedIn(false);
         removeCookie('jwt_authorization_pwc', {path: '/'});
     }
@@ -92,7 +79,7 @@ function App() {
                             open={open}
                             autoHideDuration={3000}
                             onClose={handleClose}
-                            message="Hello there, let's play 👋"
+                            message="Hello there 👋 Let's play !"
                             severity="success"
                         />
                         <Typography component="h1" variant="h4" align="center" fontWeight="bold" color="#474747" sx={{mt:10}}>
@@ -100,7 +87,7 @@ function App() {
                         </Typography>
 
                         <Typography variant="body1" align="center" color="#474747">
-                            {gameHash}
+                            game hash: {gameHash}
                         </Typography>
 
                         <div>
@@ -116,7 +103,6 @@ function App() {
                                 </Box>
                             }
                         </div>
-
 
                         <div>
                             {!isLoggedIn && (

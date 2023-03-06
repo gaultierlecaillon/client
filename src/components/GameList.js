@@ -26,7 +26,6 @@ export default function GameList() {
         fetchData();
     }, [])
 
-
     return (
         <Box sx={{my: 8, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',}}>
             <p>Games List</p>
@@ -39,5 +38,4 @@ export default function GameList() {
             </ul>
         </Box>
     )
-
 }

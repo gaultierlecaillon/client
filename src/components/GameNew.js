@@ -1,13 +1,12 @@
 import React from 'react';
-import { useContext } from "react";
 import axios from 'axios';
+import {useContext} from "react";
 import {Button, Box} from "@mui/material";
 import Cookies from "universal-cookie";
 import gameHashContext from "../game-context";
 
 export default function GameNew() {
-    const { setGameHash } = useContext(gameHashContext);
-
+    const {setGameHash} = useContext(gameHashContext);
 
     const handleClick = event => {
         const cookies = new Cookies();
@@ -27,15 +26,8 @@ export default function GameNew() {
         })
     }
 
-
     return (
-        <Box sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-        }}>
+        <Box sx={{my: 8, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',}}>
             <Button color="primary" variant="contained" onClick={handleClick}>
                 New game
             </Button>
