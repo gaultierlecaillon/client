@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import {ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {appTheme} from "./themes/theme";
+import { CookiesProvider } from 'react-cookie';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <ThemeProvider theme={appTheme}>
             <CssBaseline/>
-            <App/>
+            <CookiesProvider>
+                <App/>
+            </CookiesProvider>
         </ThemeProvider>
     </React.StrictMode>
 );

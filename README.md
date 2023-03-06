@@ -79,6 +79,7 @@
 <summary>Hosting</summary>
   <ul>
     <li><a href="https://azure.microsoft.com/en-us/products/app-service/static">Azure Static Web App</a></li>
+    <li><a href="https://azure.microsoft.com/fr-fr/products/app-service">Azure App Service</a></li>
   </ul>
 </details>
 
@@ -90,7 +91,6 @@
 - You can login via the API
 - You can start a game from the client UI
 - You can guess the number of the game
-- You can see the list of your games
 
 
 <!-- Getting Started -->
@@ -112,7 +112,7 @@ node -v # Should be more than node 16
 Install the project with npm
 
 ```bash
-  npm instal
+  npm install
 ```
 
 

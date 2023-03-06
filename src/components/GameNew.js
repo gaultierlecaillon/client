@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import gameHashContext from "../game-context";
 
 export default function GameNew() {
-    const { gameHash, setGameHash } = useContext(gameHashContext);
+    const { setGameHash } = useContext(gameHashContext);
 
 
     const handleClick = event => {

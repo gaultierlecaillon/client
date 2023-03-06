@@ -1,56 +1,58 @@
-import GameList from './components/GameList';
 import GameNew from './components/GameNew';
 import GamePlay from './components/GamePlay';
 import Header from './components/Header';
 import './App.css';
-import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import * as React from "react";
-import Typography from "@mui/material/Typography";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from "axios";
-import {Alert} from "@mui/material";
+import {Alert, Snackbar, CssBaseline, Typography} from "@mui/material";
 
 import gameHashContext from "./game-context";
 
 
 // JWT
-import Cookies from "universal-cookie";
+//import Cookies from "universal-cookie";
+import {useCookies} from 'react-cookie';
 import {useEffect, useState} from "react";
 
-const cookies = new Cookies();
-
 function App() {
+    const [cookies, setCookie, removeCookie] = useCookies(['jwt_authorization_pwc']);
 
     // Is the user logged in ?
     const [error, setError] = React.useState(false);
-
+    const [open, setOpen] = React.useState(false);
     const [gameHash, setGameHash] = React.useState(null);
     const value = {gameHash, setGameHash};
-
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
     useEffect(() => {
-        const jwtToken = cookies.get('jwt_authorization_pwc');
-        setIsLoggedIn(!!jwtToken);
-    }, []);
+        if (cookies.jwt_authorization_pwc) {
+            setIsLoggedIn(true);
+        }
+    }, [cookies]);
 
     useEffect(() => {
         console.log("gameHash:", gameHash);
     }, [gameHash]);
 
     const saveJWT = (token) => {
-        cookies.set(
-            "jwt_authorization_pwc", token, {
-                maxAge: 3600 // Will expire after 1hr (value is in number of sec.)
-            });
-        setIsLoggedIn(true);
+        setCookie('jwt_authorization_pwc', token, {path: '/', maxAge: 3600});
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const logout = () => {
+        setIsLoggedIn(false);
+        removeCookie('jwt_authorization_pwc', {path: '/'});
     }
 
     const handleSubmit = (event) => {
@@ -70,6 +72,7 @@ function App() {
         ).then(response => {
             console.log("Success:", response.data.token);
             saveJWT(response.data.token);
+            setOpen(true);
         }).catch(error => {
                 setError(true);
                 console.log("Error:", error);
@@ -84,7 +87,15 @@ function App() {
                     <CssBaseline/>
                     <Header/>
                     <Grid item pt={5} xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                        <Typography component="h1" variant="h4" align="center" fontWeight="bold" color="#474747">
+                        <Snackbar
+                            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                            open={open}
+                            autoHideDuration={3000}
+                            onClose={handleClose}
+                            message="Hello there, let's play 👋"
+                            severity="success"
+                        />
+                        <Typography component="h1" variant="h4" align="center" fontWeight="bold" color="#474747" sx={{mt:10}}>
                             Guess The Number
                         </Typography>
 
@@ -95,7 +106,17 @@ function App() {
                         <div>
                             {isLoggedIn && !gameHash && <GameNew/>}
                             {gameHash && <GamePlay/>}
+                            {isLoggedIn &&
+                                <Box position="absolute" top="0" right="0" display="flex" justifyContent="center" alignItems="center">
+                                    <Box mt={3} sx={{ margin: 'auto' }}>
+                                        <Button size="small" variant="outlined" color="inherit" sx={{ margin: '10px' }} onClick={logout}>
+                                            Logout
+                                        </Button>
+                                    </Box>
+                                </Box>
+                            }
                         </div>
+
 
                         <div>
                             {!isLoggedIn && (
