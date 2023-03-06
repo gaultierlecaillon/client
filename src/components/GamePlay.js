@@ -1,31 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import axios from 'axios';
-import {Button, Box} from "@mui/material";
+import {Button, Box, Alert} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Cookies from "universal-cookie";
-
+import gameHashContext from "../game-context";
+import {useWindowSize} from 'react-use';
+import Confetti from 'react-confetti'
 
 
 export default function GamePlay() {
-    const fetchData = () => {
-        const cookies = new Cookies();
-        const jwtToken = cookies.get('jwt_authorization_pwc');
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${jwtToken}`
-        };
-        axios.get(
-            `${process.env.REACT_APP_HOST_API}/api/game`,
-            {headers}
-        ).then(res => {
-            const games = res.data.data.games;
-        })
-
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const [message, setMessage] = useState();
+    const [isFinished, setIsFinished] = useState(false);
+    const {gameHash, setGameHash} = useContext(gameHashContext);
+    const {width, height} = useWindowSize()
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -38,13 +25,21 @@ export default function GamePlay() {
         };
 
         axios.post(
-            'http://127.0.0.1:8000/api/game/play/vy93H73DyXrKcDTR84HTKX2qjaHA3vjXvslSGFvVVm', //TODO
+            `${process.env.REACT_APP_HOST_API}/api/game/play/${gameHash}`,
             {
                 bet: data.get('bet'),
             },
             {headers}
         ).then(response => {
             console.log("Response:", response.data);
+            if (response?.data?.code < 0) {
+                setMessage({value: response.data?.message, type: 'error'});
+            } else if (response?.data?.code === 1) {
+                setMessage({value: response.data?.message, type: 'success'});
+                setIsFinished(true);
+            } else {
+                setMessage({value: response.data?.message, type: 'warning'});
+            }
         }).catch(error => {
                 console.log("Error:", error);
             }
@@ -60,7 +55,7 @@ export default function GamePlay() {
             flexDirection: 'column',
             alignItems: 'center',
         }}>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
+            <Box component="form" noValidate onSubmit={handleSubmit}>
 
                 <TextField
                     margin="normal"
@@ -71,9 +66,29 @@ export default function GamePlay() {
                     type="text"
                 />
 
-                <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
-                    Check
-                </Button>
+                {isFinished && (
+                    <Confetti
+                        width={width}
+                        height={height}
+                    />
+                )}
+
+                {!isFinished ? (
+                    <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 3}}>
+                        Check
+                    </Button>
+                ) : (
+                    <Button fullWidth variant="contained" sx={{mt: 3, mb: 3}} onClick={() => setGameHash(null)}>
+                        Play Again
+                    </Button>
+                )}
+
+                {message && (
+                    <Alert severity={message.type} sx={{mt: 1}}>
+                        {message.value}
+                    </Alert>
+                )}
+
             </Box>
         </Box>
     )

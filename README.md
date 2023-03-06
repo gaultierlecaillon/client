@@ -1,70 +1,203 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+  <img src="https://raw.githubusercontent.com/Louis3797/awesome-readme-template/main/assets/logo.png" alt="logo" width="200" height="auto" />
+  <h1>Guess the number</h1>
+  
+  <p>
+    Play and have fun !
+  </p>
+  
 
-In the project directory, you can run:
+<h4>
+    <a href="https://jolly-plant-0dd118c03.2.azurestaticapps.net">View Demo</a>
+  <span> · </span>
+    <a href="https://github.com/gaultierlecaillon/api-rest#readme">Documentation</a>
+  </h4>
+</div>
 
-### `npm start`
+<br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- Table of Contents -->
+# :notebook_with_decorative_cover: Table of Contents
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [:notebook\_with\_decorative\_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
+  - [:star2: About the Project](#star2-about-the-project)
+    - [:camera: Screenshots](#camera-screenshots)
+    - [:space\_invader: Tech Stack](#space_invader-tech-stack)
+    - [:dart: Features](#dart-features)
+  - [:toolbox: Getting Started - Frontend Service :desktop\_computer:](#toolbox-getting-started---frontend-service-desktop_computer)
+    - [:bangbang: Prerequisites](#bangbang-prerequisites)
+    - [:gear: Installation](#gear-installation)
+    - [:running: Run Locally](#running-run-locally)
+    - [:triangular\_flag\_on\_post: Deployment](#triangular_flag_on_post-deployment)
+  - [:compass: Roadmap](#compass-roadmap)
+  - [:toolbox: Getting Started - Backend Service :abacus:](#toolbox-getting-started---backend-service-abacus)
+    - [:bangbang: Prerequisites](#bangbang-prerequisites-1)
+    - [:gear: Installation](#gear-installation-1)
+    - [:running: Run Locally](#running-run-locally-1)
+    - [:triangular\_flag\_on\_post: Deployment](#triangular_flag_on_post-deployment-1)
+  - [:compass: Roadmap](#compass-roadmap-1)
+  - [:handshake: Contact](#handshake-contact)
 
-### `npm test`
+<!-- About the Project -->
+## :star2: About the Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- Screenshots -->
+### :camera: Screenshots
 
-### `npm run build`
+<div align="center">
+  <img src="https://i.postimg.cc/ncWztRHg/screenshot.png" alt="screenshot" />
+</div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- TechStack -->
+### :space_invader: Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://mui.com/">MUI React</a></li>
+  </ul>
+</details>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://laravel.com/">Laravel</a></li>
+  </ul>
+</details>
 
-### `npm run eject`
+<details>
+<summary>Database</summary>
+  <ul>
+    <li><a href="https://azure.microsoft.com/en-us/products/mysql/">Azure MySQL server</a></li>
+  </ul>
+</details>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<details>
+<summary>Hosting</summary>
+  <ul>
+    <li><a href="https://azure.microsoft.com/en-us/products/app-service/static">Azure Static Web App</a></li>
+  </ul>
+</details>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- Features -->
+### :dart: Features
 
-## Learn More
+- You can login via the API
+- You can start a game from the client UI
+- You can guess the number of the game
+- You can see the list of your games
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- Getting Started -->
+## :toolbox: Getting Started - Frontend Service :desktop_computer:
 
-### Code Splitting
+<!-- Prerequisites -->
+### :bangbang: Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project uses Node.js
 
-### Analyzing the Bundle Size
+```bash
+node -v # Should be more than node 16
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+```
+<!-- Installation -->
+### :gear: Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Install the project with npm
 
-### Advanced Configuration
+```bash
+  npm instal
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+<!-- Run Locally -->
+### :running: Run Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Start the server
 
-### `npm run build` fails to minify
+```bash
+  npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- Deployment -->
+### :triangular_flag_on_post: Deployment
+
+The deployment is automatically done with Azure Static Apps and Github Actions on git push over main branch
+
+```bash
+  git push
+```
+
+<!-- Roadmap -->
+## :compass: Roadmap
+
+- [ ] Redo the frontend UI
+- [ ] Add Cypress
+- [ ] Display leaderboard
+
+<!-- Getting Started -->
+## :toolbox: Getting Started - Backend Service :abacus:
+
+<!-- Prerequisites -->
+### :bangbang: Prerequisites
+
+This project uses docker :whale2:, compose and php
+
+```bash
+php -v # Should be php8
+```
+
+```bash
+#Install composer
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
+
+<!-- Installation -->
+### :gear: Installation
+
+Install the project with npm
+
+```bash
+  cd api-rest
+  composer install
+```
+
+<!-- Run Locally -->
+### :running: Run Locally
+
+Start docker compose
+
+```bash
+  docker-compose up
+```
+
+<!-- Deployment -->
+### :triangular_flag_on_post: Deployment
+
+The deployment is done on Azure App Service - docker-compose by using DockerHub registry.
+You can use it like so
+```bash
+  docker build . -t registry/image:tag
+```
+
+<!-- Roadmap -->
+## :compass: Roadmap
+
+- [ ] Add new features to auto resolve game
+- [ ] Add more tests
+
+<!-- Contact -->
+## :handshake: Contact
+
+Gaultier Lecaillon
+
+

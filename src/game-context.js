@@ -2,9 +2,8 @@ import React from "react";
 
 // set the defaults
 const gameHashContext = React.createContext({
-    gameHash: "test",
+    gameHash: "",
     setGameHash: () => {}
 });
-
 
 export default gameHashContext;

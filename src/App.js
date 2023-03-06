@@ -31,7 +31,7 @@ function App() {
     const [error, setError] = React.useState(false);
 
     const [gameHash, setGameHash] = React.useState(null);
-    const value = { gameHash, setGameHash };
+    const value = {gameHash, setGameHash};
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -42,7 +42,7 @@ function App() {
     }, []);
 
     useEffect(() => {
-        console.log("hello from app", gameHash);
+        console.log("gameHash:", gameHash);
     }, [gameHash]);
 
     const saveJWT = (token) => {
@@ -87,69 +87,69 @@ function App() {
                         <Typography component="h1" variant="h4" align="center" fontWeight="bold" color="#474747">
                             Guess The Number
                         </Typography>
-                        {isLoggedIn ? (
-                            <div>
-                                <GameNew/>
-                                <GamePlay/>
-                                <GameList/>
-                            </div>
-                        ) : (
-                            <div>
-                                {isLoggedIn ? (
-                                    <div>You are already logged in.</div>
-                                ) : (
-                                    <Box sx={{
-                                        my: 8,
-                                        mx: 4,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                    }}>
-                                        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                                            <LockOutlinedIcon/>
-                                        </Avatar>
-                                        <Typography component="h1" variant="h5">
-                                            Sign in
-                                        </Typography>
-                                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
-                                            <TextField
-                                                margin="normal"
-                                                required
-                                                fullWidth
-                                                id="username"
-                                                label="Username"
-                                                name="username"
-                                                autoComplete="username"
-                                                autoFocus
-                                            />
-                                            <TextField
-                                                margin="normal"
-                                                required
-                                                fullWidth
-                                                name="password"
-                                                label="Password"
-                                                type="password"
-                                                id="password"
-                                                autoComplete="current-password"
-                                            />
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{mt: 3, mb: 2}}
-                                            >
-                                                Sign In
-                                            </Button>
-                                            {error && (
-                                                <Alert variant="outlined" severity="error">
-                                                    <strong>Unable to Login</strong> - Please check your credentials
-                                                </Alert>
-                                            )}
-                                        </Box>
+
+                        <Typography variant="body1" align="center" color="#474747">
+                            {gameHash}
+                        </Typography>
+
+                        <div>
+                            {isLoggedIn && !gameHash && <GameNew/>}
+                            {gameHash && <GamePlay/>}
+                        </div>
+
+                        <div>
+                            {!isLoggedIn && (
+                                <Box sx={{
+                                    my: 8,
+                                    mx: 4,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                }}>
+                                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                                        <LockOutlinedIcon/>
+                                    </Avatar>
+                                    <Typography component="h1" variant="h5">
+                                        Sign in
+                                    </Typography>
+                                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
+                                        <TextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            id="username"
+                                            label="Username"
+                                            name="username"
+                                            autoComplete="username"
+                                            autoFocus
+                                        />
+                                        <TextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            name="password"
+                                            label="Password"
+                                            type="password"
+                                            id="password"
+                                            autoComplete="current-password"
+                                        />
+                                        <Button
+                                            type="submit"
+                                            fullWidth
+                                            variant="contained"
+                                            sx={{mt: 3, mb: 2}}
+                                        >
+                                            Sign In
+                                        </Button>
+                                        {error && (
+                                            <Alert variant="outlined" severity="error">
+                                                <strong>Unable to Login</strong> - Please check your credentials
+                                            </Alert>
+                                        )}
                                     </Box>
-                                )}
-                            </div>
-                        )}
+                                </Box>
+                            )}
+                        </div>
                     </Grid>
                 </Grid>
             </div>
