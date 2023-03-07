@@ -86,9 +86,11 @@ function App() {
                             Guess The Number
                         </Typography>
 
+
+                        {isLoggedIn &&
                         <Typography variant="body1" align="center" color="#474747">
                             game hash: {gameHash}
-                        </Typography>
+                        </Typography>}
 
                         <div>
                             {isLoggedIn && !gameHash && <GameNew/>}
